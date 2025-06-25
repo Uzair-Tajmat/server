@@ -25,6 +25,12 @@ db = SQLAlchemy(app)
 
 allowed_origins = os.environ.get('ALLOWED_ORIGINS', 'https://client-two-swart.vercel.app').split(',')
 CORS(app, origins=allowed_origins,supports_credentials=True)
+app.config.update(
+  SESSION_COOKIE_SAMESITE='None',  # or 'None' for cross-site
+  SESSION_COOKIE_SECURE=True,    # If using HTTPS
+  SESSION_COOKIE_HTTPONLY=True,
+  PERMANENT_SESSION_LIFETIME=86400  # 24h session expiry
+)
 # Twilio configuration
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
