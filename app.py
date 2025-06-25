@@ -20,7 +20,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize extensions
 db = SQLAlchemy(app)
-CORS(app, origins=['http://localhost:3000', 'https://client-two-swart.vercel.app/'], supports_credentials=True)
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:3000",  # for local testing
+    "https://client-two-swart.vercel.app"  # your Vercel frontend
+])
+
 
 # Twilio configuration
 TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
